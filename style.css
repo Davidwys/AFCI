@@ -7,36 +7,39 @@
 header{
     width: 100%;
     background-color: rgb(0, 128, 0);    
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 5vh;
+    padding-top: 1vh;
+    padding-bottom: 2vh;
 }
-
-
-
+section{
+    display: flex;
+    margin-top: 3vh;
+}
 nav{
     width: 100%;
-    font-weight: bold;
-    display: inline-block;
+    padding: 0;
+    margin: 0;
+    font-weight: bold 
+}
+nav ul{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 2vh;
 }
 
-
 nav li{
+    display: inline;
     width: 100%;
-    list-style-type: none;
+    list-style: none;
     color: white;
-    margin: 2vw;
     text-align: center;
     
 }
 
-main{
-    display: grid;
-    margin-top: 3vh;
-    grid-template-columns: repeat(auto-fill, minmax(auto, 1fr)) ;
-    grid-gap: 30px; /*espace entre les éléments de la grille*/
-    margin: 40px 20px;
-}
+
+    
+
 .cardContainer{
     position: relative;
     min-height: 350px;
@@ -53,7 +56,7 @@ main{
 .card{
     position: relative;
     height:100%;
-    width: 100%;
+    width: 25vw;
     font-weight: bold;
     color: black;
     border-radius: 5px;
@@ -116,14 +119,14 @@ main{
     background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
+
+
+
+
 footer{
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 
-}
-
-footer p{
     margin: 5vh;
     font-size: 1.8em;
 }
