@@ -1,0 +1,45 @@
+/*
+    Styles CSS pour la partie "admin"
+*/
+*,::before,::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    /* ----- Ce sont des variables CSS (voir la classe "#admNav" pour utilisation) ----- */
+    --police-un: Verdana, Geneva, Tahoma, sans-serif;
+    --police-deux: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    --police-trois: Arial, Helvetica, sans-serif;
+}
+#admNav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-family: var(--police-un);
+    font-size: 16px;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    border-top: 1px solid black;
+}
+.lienM,
+.lienM:link,
+.lienM:visited {
+    text-decoration: none;
+    background-color: red;
+    color: whitesmoke;
+    padding: 6px;
+    border: 1px solid black;
+    border-radius: 3px;
+
+}
+.lienM:hover {
+    background-color: chocolate;
+    color:bisque;
+}
+.lienM:active {
+    background-color: black;
+    color: whitesmoke;
+}

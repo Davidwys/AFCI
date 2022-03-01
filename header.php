@@ -1,3 +1,7 @@
+<?php
+require("config.php");
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,6 +11,10 @@
     <title>La pizzeria des Papas</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="desserts.css">
+<?php
+// TODO : Insérer le CSS suivant UNIQUEMENT si l'user est un administrateur
+    echo '<link rel="stylesheet" href="_admin_style.css">';
+?>
 </head>
 <body>
     <header>
