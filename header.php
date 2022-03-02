@@ -12,8 +12,10 @@ session_start();
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="desserts.css">
 <?php
-// TODO : Insérer le CSS suivant UNIQUEMENT si l'user est un administrateur
+// Si le visiteur est un administrateur, j'ajoute le CSS pour les pages d'administration
+if($_SESSION["role"] == "administrateur") {
     echo '<link rel="stylesheet" href="_admin_style.css">';
+}
 ?>
 </head>
 <body>
@@ -24,7 +26,18 @@ session_start();
                 <li>Les Pizzas</li>
                 <li>Les Boissons</li>
                 <li>Les Desserts</li>
-                <li>Connexion</li>
+<?php
+// Le visiteur est-il connecté ? :
+if(!isset($_SESSION["role"])) {// Si, pas connecté, on affiche le lien de connexion
+                echo '<li><a href="connexion.php">Connexion</a></li>';
+} elseif(isset($_SESSION["role"]) && $_SESSION["role"] == "administrateur") {// Si connecté et, que c'est un "administrateur"
+    // On affiche le lien vers la page d'administration du site
+                echo '<li><a href="_admin.php">Administration</a></li>';    
+} else {// Sinon, ça ne peut être qu'un client connecté !
+                echo '<li>Bonjour !</li>';
+}
+?>
+                
             </ul>
         </nav>
     </header>
