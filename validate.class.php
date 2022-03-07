@@ -22,7 +22,8 @@ class Validate {
 
     function checkPassword($pass) {
         // La regex suivante pour les mots de passe
-        $regexPass = "/^(?=.*[!?@#$%^&*+-])(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{6,}$/";
+        //$regexPass = "/^(?=.*[!?@#$%^&*+-])(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{6,}$/";
+        $regexPass = "/^(?=.*[!?@#$%^&*+-])(?=.*[a-z]).{6,}$/";
         $this->pass = $this->clean($pass);
         if(!preg_match($regexPass, $this->pass)) {
             //return false;// Erreur => Mot de passe invalide

@@ -1,7 +1,7 @@
 <?php
 require("header.php");
 require("validate.class.php");
-// Si c'est une connexion :
+// Si il y a une demande de connexion :
 if(isset($_POST["connexion"])) {
     $connexion = new Validate;
     $connexion->checkEmail($_POST["email"]);
@@ -9,12 +9,16 @@ if(isset($_POST["connexion"])) {
 
     if(empty($connexion->erreur)) {
         // On identifie le visiteur :
-        echo "Connexion ok !";
+        //echo "Connexion ok !";
+        
+
+        // Comparaison du mot de passe posté avec celui en BDD
+
     } else {
         $error = $connexion->erreur;
     }
 }
-// Si c'est une inscription :
+// Si il y a une demande d'inscription :
 if(isset($_POST["inscription"])) {
     echo "inscription";
 }
@@ -31,6 +35,10 @@ if(isset($error)) {
     }
     echo "\t</article>\n";
 }
+// Si le visiteur est déjà connecté :
+if(isset($_SESSION["role"])) {
+    echo "\t<p>Bienvenue à la pizzeria des Papas !</p>";
+} else {
 ?>
 
     <form action="#" method="post" class="form-1">
@@ -50,6 +58,9 @@ if(isset($error)) {
         <input type="submit" value="Inscription">
         <input type="hidden" name="inscription">
     </form>
+<?php
+}
+?>
 </main>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
