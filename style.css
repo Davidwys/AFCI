@@ -117,11 +117,6 @@ nav li{
     /* Plusieurs propriétés peuvent être visées en les séparant d'une virgule ou bien "all" qui les sélectionnera toutes */
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
-
-
-
-
-
 footer{
     display: flex;
     align-items: center;
@@ -129,8 +124,24 @@ footer{
 
     /* border:  */
 }
-
 footer p{
     margin: 5vh;
     font-size: 1.8em;
+}
+/* -----------------------------------
+  Ci-dessous pour la mise en page 
+  de [connexion.php]*/
+.connexion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.error {
+    color: white;
+    background-color: red;
+    border: 1px solid black;
+    padding: 10px;
+    width: 75%;
+    text-align: center;
 }
