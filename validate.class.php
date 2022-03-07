@@ -14,7 +14,7 @@ class Validate {
 
         if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
             // return false;// Erreur => e-mail invalide
-            $this->erreur["email"] = "Veuillez entrer un email valide";
+            $this->erreur["email"] = "Veuillez entrer un email valide.";
         } else {
             return $this->email;
         }

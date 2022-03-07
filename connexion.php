@@ -21,33 +21,39 @@ if(isset($_POST["inscription"])) {
 ?>
 
 <main class="connexion">
-    <h1>Page de connexion/inscription</h1>
+    <h1>Page de connexion et d'inscription</h1>
 
 <?php
 if(isset($error)) {
+    echo "\n\t<article class=\"error\">\n";
     foreach($error as $message) {
-        echo '<article class="error">'.$message.'</article>';
+        echo "\t\t" . $message . "<br>\n";
     }
+    echo "\t</article>\n";
 }
 ?>
 
-    <form action="#" method="post">
-        <label for="email">E-mail : </label><input type="text" name="email" id="email">
-        <label for="password">Mot de passe : </label><input type="password" name="password" id="password">
+    <form action="#" method="post" class="form-1">
+        <div class="form-1-titre">Connectez-vous</div>
+        <label for="email">E-mail</label><input type="text" name="email" id="email">
+        <label for="password">Mot de passe</label><input type="password" name="password" id="password">
         <input type="submit" value="Connexion">
         <input type="hidden" name="connexion">
     </form>
     <p>&nbsp;</p>
+    <p>ou</p>
     <p>&nbsp;</p>
-    <form action="#" method="post">
-        <label for="email">E-mail : </label><input type="text" name="email" id="email">
-        <label for="password">Mot de passe : </label><input type="password" name="password" id="password">
+    <form action="#" method="post" class="form-1">
+        <div class="form-1-titre">Inscrivez-vous</div>
+        <label for="email">E-mail</label><input type="text" name="email" id="email">
+        <label for="password">Mot de passe</label><input type="password" name="password" id="password">
         <input type="submit" value="Inscription">
         <input type="hidden" name="inscription">
     </form>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
 </main>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 
 <?php
 require("footer.php");
