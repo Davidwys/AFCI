@@ -13,7 +13,7 @@ session_start();
     <link rel="stylesheet" href="desserts.css">
 <?php
 // Si le visiteur est un administrateur, j'ajoute le CSS pour les pages d'administration
-if($_SESSION["role"] == "administrateur") {
+if(isset($_SESSION["role"]) && $_SESSION["role"] == "administrateur") {
     echo '<link rel="stylesheet" href="_admin_style.css">';
 }
 ?>
