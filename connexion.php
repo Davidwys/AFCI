@@ -4,16 +4,22 @@ require("validate.class.php");
 // Si il y a une demande de connexion :
 if(isset($_POST["connexion"])) {
     $connexion = new Validate;
-    $connexion->checkEmail($_POST["email"]);
-    $connexion->checkPassword($_POST["password"]);
+    $email = $connexion->checkEmail($_POST["email"]);
+    $password = $connexion->checkPassword($_POST["password"]);
 
     if(empty($connexion->erreur)) {
         // On identifie le visiteur :
-        //echo "Connexion ok !";
+        // 1 - on sélectionne l'utilisateur en BDD grâce aux infos transmis avec le formulaire de connexion (e-mail et mot de passe).
+        if(selectByEmail($email)) {// si l'e-mail est présent en BDD
+            // On compare son mot de passe avec celui en BDD :
+            
+            
+            // On fini en créant les variables de session local :
+            
+        } else {
+            $error = "L'utilisateur n'existe pas !";
+        }
         
-
-        // Comparaison du mot de passe posté avec celui en BDD
-
     } else {
         $error = $connexion->erreur;
     }
