@@ -1,16 +1,14 @@
 <?php
 // Ajout d'un utilisateur en BDD
-function ajout($username, $password, $email, $file) {
+function ajout($password, $email) {
     $pdo = connexion();
     // On enregistre les données en BDD
     $sql = $pdo->prepare(
-        "INSERT INTO user (username, email, password, image) VALUES (:user, :em, :pass, :im)"
+        "INSERT INTO user (email, password) VALUES (:em, :pass)"
     );
     $sql->execute([
-        "user" => $username,
         "em" => $email,
-        "pass" => $password,
-        "im" => $file
+        "pass" => $password
     ]);
 }
 

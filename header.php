@@ -1,6 +1,6 @@
 <?php
-require("config.php");
 session_start();
+require("config.php");
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -34,7 +34,7 @@ if(!isset($_SESSION["role"])) {// Si, pas connecté, on affiche le lien de conne
     // On affiche le lien vers la page d'administration du site
                 echo '<li><a href="_admin.php">Administration</a></li>';    
 } else {// Sinon, ça ne peut être qu'un client connecté !
-                echo '<li>Bonjour !</li>';
+                echo '<li><a href="connexion.php?v=exit">Déconnexion</a></li>';
 }
 ?>
                 

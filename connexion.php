@@ -2,21 +2,23 @@
 require("header.php");
 require("validate.class.php");
 require("user.class.php");
-function logout() {//----------------- TODO / FAIRE LA DéCONNEXION SI ???
-    // On démarre l'outil de gestion de variable de session.
-    session_start();
 
+// Si il y a une demande de déconnexion
+if(isset($_GET['v']) && $_GET['v'] == 'exit') {
+    logout();
+    // Puis on affiche un petit message à notre utilisateur
+    $error = "Merci de votre visite, à très bientôt ;)";
+    $errorClass = "no-error";
+}
+function logout() {
     // On vide nos variable de session.
     $_SESSION = [];
 
     // On met fin à la session.
     session_destroy();
+}
 
-    // Puis on redirige notre utilisateur
-    header("location:connexion");
-    // On met fin à toute interprétation de code.
-    exit;
-}//------------------------------------ TODO 
+//------------------------------------ TODO 
 
 // Si il y a une demande de connexion :
 if(isset($_POST["connexion"])) {
@@ -29,7 +31,7 @@ if(isset($_POST["connexion"])) {
         // On identifie le visiteur :
         // 1 - on sélectionne l'utilisateur en BDD grâce aux infos transmis avec le formulaire de connexion (e-mail et mot de passe).
         $user = selectByEmail($email);
-        var_dump($user);
+        //var_dump($user);
         if($user) {// si l'e-mail est présent en BDD
             if(password_verify($password, $user["password"])) {
                 /* Je range dans les variables de session dans les index de mon choix, les valeurs prouvant que l'utilisateur est connecté. */
@@ -39,16 +41,19 @@ if(isset($_POST["connexion"])) {
                 
             } else {// Si le mot de passe ne correspond pas
                 $error = "Mot de passe incorrecte.";
+                $errorClass = "error";
             }
         } else {
             $error = "L'utilisateur n'existe pas !";
+            $errorClass = "error";
         }
     } else {
         $error = $connexion->erreur;
+        $errorClass = "error";
     }
 }
 // Si il y a une demande d'inscription :
-if(isset($_POST["inscription"])) {
+if(isset($_POST["inscription"])) {// ========================[ TODO ! ]===
     echo "inscription";
 }
 ?>
@@ -58,7 +63,7 @@ if(isset($_POST["inscription"])) {
 
 <?php
 if(isset($error)) {
-    echo "\n\t<article class=\"error\">\n";
+    echo "\n\t<article class=\"" . $errorClass . "\">\n";
     /*foreach($error as $message) {
         echo "\t\t" . $message . "<br>\n";
     }*/
@@ -74,7 +79,7 @@ if(isset($_SESSION["role"])) {
 } else {
 ?>
 
-    <form action="#" method="post" class="form-1">
+    <form action="connexion.php" method="post" class="form-1">
         <div class="form-1-titre">Connectez-vous</div>
         <label for="email">E-mail</label><input type="text" name="email" id="email">
         <label for="password">Mot de passe</label><input type="password" name="password" id="password">
@@ -84,7 +89,7 @@ if(isset($_SESSION["role"])) {
     <p>&nbsp;</p>
     <p>ou</p>
     <p>&nbsp;</p>
-    <form action="#" method="post" class="form-1">
+    <form action="connexion.php" method="post" class="form-1">
         <div class="form-1-titre">Inscrivez-vous</div>
         <label for="email">E-mail</label><input type="text" name="email" id="email">
         <label for="password">Mot de passe</label><input type="password" name="password" id="password">
