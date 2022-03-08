@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 08 mars 2022 à 14:44
+-- Généré le : mar. 08 mars 2022 à 14:56
 -- Version du serveur : 10.4.20-MariaDB
 -- Version de PHP : 8.0.9
 
@@ -20,6 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `projet_pizza`
 --
+DROP DATABASE IF EXISTS `projet_pizza`;
 CREATE DATABASE IF NOT EXISTS `projet_pizza` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `projet_pizza`;
 
@@ -29,6 +30,7 @@ USE `projet_pizza`;
 -- Structure de la table `articles`
 --
 
+DROP TABLE IF EXISTS `articles`;
 CREATE TABLE `articles` (
   `idArticle` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL,
@@ -79,6 +81,7 @@ INSERT INTO `articles` (`idArticle`, `nom`, `description`, `image`, `idCategorie
 -- Structure de la table `categories`
 --
 
+DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `idCategorie` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL,
@@ -108,6 +111,7 @@ INSERT INTO `categories` (`idCategorie`, `nom`, `image`, `petite`, `grande`) VAL
 -- Structure de la table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `idUser` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,

@@ -19,7 +19,7 @@ function selectByEmail($email) {
     // Je récupère la connexion
     $pdo = connexion();
     // Je prépare la requête
-    $sql = $pdo->prepare("SELECT * FROM user WHERE email=:em");
+    $sql = $pdo->prepare("SELECT * FROM users WHERE email=:em");
     // J'execute la requête
     $sql->execute(["em" => $email]);
     // Je retourne les informations trouvé.
@@ -43,7 +43,7 @@ function selectById($id) {
     // Je récupère la connexion
     $pdo = connexion();
     // Je prépare la requête
-    $sql = $pdo->prepare("SELECT * FROM user WHERE id=:id");
+    $sql = $pdo->prepare("SELECT * FROM users WHERE id=:id");
     // J'execute la requête
     $sql->execute(["id" => $id]);
     // Je retourne les informations trouvé.
@@ -56,7 +56,7 @@ On prépare une requête avec "UPDATE user SET ... WHERE ..." où dans notre SET
 Ensuite on execute notre requête. */
 function update($id, $username, $email, $password) {
     $pdo = connexion();
-    $sql = $pdo->prepare("UPDATE user SET username=:us, email=:em, password=:mdp WHERE id=:id");
+    $sql = $pdo->prepare("UPDATE users SET username=:us, email=:em, password=:mdp WHERE id=:id");
     $sql->execute([
         "id" => $id,
         "em" => $email,
@@ -67,7 +67,7 @@ function update($id, $username, $email, $password) {
 
 function delete($id) {
     $pdo = connexion();
-    $sql = $pdo->prepare("DELETE FROM user WHERE id=:id");
+    $sql = $pdo->prepare("DELETE FROM users WHERE id=:id");
     $sql->execute(["id" => $id]);
 }
 
