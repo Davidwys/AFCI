@@ -23,14 +23,16 @@ if(isset($_POST["connexion"])) {
     $connexion = new Validate;
     $email = $connexion->checkEmail($_POST["email"]);
     $password = $connexion->checkPassword($_POST["password"]);
+    var_dump($password);
 
     if(empty($connexion->erreur)) {
         // On identifie le visiteur :
         // 1 - on sélectionne l'utilisateur en BDD grâce aux infos transmis avec le formulaire de connexion (e-mail et mot de passe).
         $user = selectByEmail($email);
+        var_dump($user);
         if($user) {// si l'e-mail est présent en BDD
-            if(password_verify($pass, $user["password"])) {
-                /* Je range dans  le svariables de session dans les index de mon choix, les valeurs prouvant que l'utilisateur est connecté. */
+            if(password_verify($password, $user["password"])) {
+                /* Je range dans les variables de session dans les index de mon choix, les valeurs prouvant que l'utilisateur est connecté. */
                 $_SESSION["role"] = $user["role"];
                 $_SESSION["idUser"] = $user["idUser"];
                 $_SESSION["email"] = $user["email"];

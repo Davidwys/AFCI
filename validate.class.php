@@ -29,7 +29,7 @@ class Validate {
             //return false;// Erreur => Mot de passe invalide
             $this->erreur["password"] = "Votre mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre et un caractère spécial.";
         } else {
-            return password_hash(trim($this->pass), PASSWORD_DEFAULT);
+            return trim($this->pass);
         }
     }
 
