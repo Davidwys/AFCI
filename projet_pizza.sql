@@ -124,8 +124,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`idUser`, `email`, `password`, `role`) VALUES
-(1, 'admin@admin.fr', '$2y$10$JDnEyS52Fi9ZlMZ0z1/i0Ov528/T8xOtvdaAffyvQQoy1Uz0iK.n2', 'administrateur'),
-(2, 'user@user.fr', '$2y$10$uXDlxTV1KhTHN6GaoIxJduSq8R6RwD2II2ChxuvJiGmApXZvskcMC', 'client');
+(1, 'admin@admin.fr', '$2y$10$eqQT1xKJnGBapRkCRADUYOxCc0zqPXX00z/KAPcOaTkJJ3a.nKnUy', 'administrateur'),
+(2, 'user@user.fr', '$2y$10$eSnjpvz6w.NOHd/opF1OzejVSknpPV1R5WYJS346erWvD381OK1Ve', 'client');
 
 --
 -- Index pour les tables déchargées
