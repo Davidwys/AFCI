@@ -30,12 +30,12 @@ require("header.php");
     <div class="cardContainer">
         <div class="card">
             <div class="cardFront">
-                <img src="img/istockphoto-1087873980-612x612.jpg" alt="">
-                <p>
+                <!-- <?php <img src="img/istockphoto-1087873980-612x612.jpg" alt=""> ?> -->
+                <p> 
                     Menu enfant
                 </p>
                 <p class="cardPrice">
-                    10 €
+                    10 €<?php ?>
                 </p>
             </div>
             <div class="cardBack">
