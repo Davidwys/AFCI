@@ -30,7 +30,7 @@ require("header.php");
     <div class="cardContainer">
         <div class="card">
             <div class="cardFront">
-                <!-- <?php <img src="img/istockphoto-1087873980-612x612.jpg" alt=""> ?> -->
+                <!-- <?php echo '<img src="img/istockphoto-1087873980-612x612.jpg" alt="">'; ?> -->
                 <p> 
                     Menu enfant
                 </p>
