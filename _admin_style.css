@@ -8,22 +8,27 @@
 }
 :root {
     /* ----- Ce sont des variables CSS (voir la classe "#admNav" pour utilisation) ----- */
-    --police-un: Verdana, Geneva, Tahoma, sans-serif;
-    --police-deux: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    --police-trois: Arial, Helvetica, sans-serif;
+    --font-ver: Verdana, Geneva, Tahoma, sans-serif;
+    --font-tre: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    --font-ari: Arial, Helvetica, sans-serif;
+}
+main {
+    font-family: var(--font-ari);
+    padding: 10px;
 }
 #admNav ul {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    font-family: var(--police-un);
+    font-family: var(--font-ver);
     font-size: 16px;
     margin-top: 0;
     margin-left: 0;
     margin-right: 0;
     border-top: 1px solid black;
 }
+/* ------------------------------------------------------ [ Liens du menu administrateur]--- */
 .lienM,
 .lienM:link,
 .lienM:visited {
@@ -43,6 +48,21 @@
     background-color: black;
     color: whitesmoke;
 }
+/* ------------------------------------------------------ [ Liens ]--- */
+a,
+a:link,
+a:visited {
+    text-decoration: none;
+    color: rgb(114, 89, 255);
+
+}
+a:hover {
+    color:rgb(141, 121, 255);
+}
+a:active {
+    color: rgb(133, 120, 206);
+}
+/* ------------------------------------------------------------------------------------------ */
 .error {
     color: white;
     background-color: red;
