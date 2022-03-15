@@ -32,7 +32,7 @@ main {
     margin-right: 0;
     border-top: 1px solid black;
 }
-/* ------------------------------------------------------ [ Tableau ]---------------------- */
+/* ------------------------------------------------------ [ Tableaux ]---------------------- */
 table {
     border-collapse: collapse;
 }
@@ -59,6 +59,38 @@ td {
     padding: 5px;
 }
 
+.tabForm {
+    border-collapse: collapse;
+}
+.tabForm > caption {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.tabForm tbody tr {
+    background-color: white;
+}
+.tabForm tbody tr td:nth-child(odd) {
+    text-align: right;
+}
+.tabForm td {
+    padding: 15px;
+}
+/* ------------------------------------------------------ [ Champs de formulaire ]---------- */
+input {
+    padding: 5px;
+    font-size: 1rem;
+}
+input[type="text"] {
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid green;
+    border-left: 0;
+    font-size: 1rem;
+}
+textarea {
+    border: 1px solid green;
+    font-size: 1rem;
+}
 /* ------------------------------------------------------ [ Liens du menu administrateur]--- */
 .lienM,
 .lienM:link,
@@ -79,7 +111,7 @@ td {
     background-color: black;
     color: whitesmoke;
 }
-/* ------------------------------------------------------ [ Liens ]--- */
+/* ------------------------------------------------------ [ Liens ]------------------------- */
 a,
 a:link,
 a:visited {
@@ -93,7 +125,7 @@ a:hover {
 a:active {
     color: rgb(133, 120, 206);
 }
-/* ------------------------------------------------------------------------------------------ */
+/* -----------------------------------------------------[ Divers ]-------------------------- */
 .error {
     color: white;
     background-color: red;
@@ -108,4 +140,11 @@ a:active {
 .icon {
     width: 20px;
     height: 20px;
+}
+.img-mini {
+    width: 150px;
+    height: 150px;
+}
+label:hover {
+    cursor: pointer;
 }
