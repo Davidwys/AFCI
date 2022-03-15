@@ -20,12 +20,9 @@ function selectAllCategories() {
     return $sql->fetchAll(PDO::FETCH_GROUP|PDO::FETCH_ASSOC);
 }
 $categories = selectAllCategories();
-echo "<pre>";
+/*echo "<pre>";
 var_export($categories);
-echo "</pre>";
-// foreach($categories as $key => $value) {
-//     echo $key." = ".implode(" - ", $value[0])."<br>";
-// }
+echo "</pre>";*/
 ?>
 
     <table>
