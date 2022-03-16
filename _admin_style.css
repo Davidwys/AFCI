@@ -134,6 +134,14 @@ a:active {
     width: 75%;
     text-align: center;
 }
+.check {
+    color: white;
+    background-color: rgb(2, 211, 2);
+    border: 1px solid black;
+    padding: 10px;
+    width: 75%;
+    text-align: center;
+}
 .center {
     text-align: center;
 }
