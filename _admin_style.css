@@ -76,9 +76,10 @@ td {
     padding: 15px;
 }
 /* ------------------------------------------------------ [ Champs de formulaire ]---------- */
-input {
+input, select, option, textarea {
+    width: 350px;
     padding: 5px;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 input[type="text"] {
     border-top: 0;
@@ -87,9 +88,30 @@ input[type="text"] {
     border-left: 0;
     font-size: 1rem;
 }
+input[type="submit"] {
+    background-color: green;
+    color: white;
+    padding: 7px;
+    font-size: 0.9rem;
+    border-radius: 7px;
+    border-style: none;
+    /*opacity: 0;*/
+}
+input[type="file"] {
+    background-color: green;
+    color: white;
+}
+select {
+    color: white;
+    background-color: green;
+    border: none;
+    padding: 7px;
+}
 textarea {
     border: 1px solid green;
-    font-size: 1rem;
+    /*width: 350px;
+    font-size: 1rem;*/
+    resize: none;
 }
 /* ------------------------------------------------------ [ Liens du menu administrateur]--- */
 .lienM,

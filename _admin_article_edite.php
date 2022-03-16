@@ -6,40 +6,40 @@ $error = false;
 $color = false;
 // -----------------------------------[ TRAITEMENT DU FORMULAIRE ]-----------
 if($_POST) {
-    $error = false;
-    $id = is_numeric(trim($_GET["id"])) ? $_GET["id"] : $error = "Le format de l'identifiant de l'article est inconnu.", $color = ".error";
-    $cat = is_numeric(trim($_POST["categorie"])) ? $_POST["categorie"] : $error = "Le format de l'identifiant de la catégorie est inconnu.", $color = ".error";
-    $nom = cleanString($_POST["name"]) != "" ? cleanString($_POST["name"]) : $error = "Le champs \"Nom\" est vide.", $color = ".error";
-    $description = cleanString($_POST["description"]) != "" ? cleanString($_POST["description"]) : $error = "Le champs \"Description\" est vide.", $color = ".error";
+    //$id = is_numeric(trim($_GET["id"])) ? $_GET["id"] : $error = "Le format de l'identifiant de l'article est inconnu.", $color = "error";
+    $id = is_numeric(trim($_GET["id"])) ? $_GET["id"] : $error = ["message" => "Le format de l'identifiant de l'article est inconnu.", "color" => "error"];
+    //$cat = is_numeric(trim($_POST["categorie"])) ? $_POST["categorie"] : $error = "Le format de l'identifiant de la catégorie est inconnu.", $color = "error";
+    $cat = is_numeric(trim($_POST["categorie"])) ? $_POST["categorie"] : $error = ["message" => "Le format de l'identifiant de la catégorie est inconnu.", "color" => "error"];
+    //$nom = cleanString($_POST["name"]) != "" ? cleanString($_POST["name"]) : $error = "Le champs \"Nom\" est vide.", $color = "error";
+    $nom = cleanString($_POST["name"]) != "" ? cleanString($_POST["name"]) : $error = ["message" => "Le champs \"Nom\" est vide.", "color" => "error"];
+    //$description = cleanString($_POST["description"]) != "" ? cleanString($_POST["description"]) : $error = "Le champs \"Description\" est vide.", $color = "error";
+    $description = cleanString($_POST["description"]) != "" ? cleanString($_POST["description"]) : $error = ["message" => "Le champs \"Description\" est vide.", "color" => "error"];
     //$img = ;// TODO ###################
 
     // Vérification des champs
-    if($error) {
-        echo $error;
-    } else {// MAJ si tout est OK
+    if($error == false) {// MAJ si tout est OK
         // var_dump(
         //     'ID = ' . $id . '<br>'.
         //     'Catégorie = ' . $cat . '<br>'.
         //     'Nom = ' . $nom . '<br>'.
         //     'Description = ' . $description
         // );
-        $pdo->prepare("UPDATE articles SET 
-                nom = :name, 
-                description = :details,
-                cat = :cat
-                WHERE idArticle = :id");
+        echo "stop : != de false"; exit;
+        /*$pdo = connexion();
+        $sql = $pdo->prepare("UPDATE articles SET 
+            nom = :name, 
+            description = :details,
+            idCategorie = :cat
+            WHERE idArticle = :id");
         $sql->execute([
             "name" => $nom,
             "details" => $description,
             "cat" => $cat,
             "id" => $id
-        ]);
+        ]);*/
         $error = "L'article a été modifié avec succès.";
         $color = ".check";
     }
-
-    
-
 }
 // -----------------------------------[ TRAITEMENT DU FORMULAIRE : FiN! ]----
 
@@ -49,10 +49,8 @@ function selectArticle($i) {
     return $sql->fetch();
 }
 if(isset($_GET["id"]) && isset($_GET["action"]) && $_GET["action"] == "edite") {
-    $id = is_numeric(trim($_GET["id"])) ? $_GET["id"] : $error = "get-id-nonum";
-    if($error === false) {
-        $article = selectArticle($id);
-    }
+    $id = is_numeric(trim($_GET["id"])) ? $_GET["id"] : $error = ["message" => "Aucun article à afficher", "color" => "error"];
+    $article = selectArticle($id);
 }
 ?>
 
@@ -61,7 +59,7 @@ if(isset($_GET["id"]) && isset($_GET["action"]) && $_GET["action"] == "edite") {
 <?php
 // Affichage d'une eventuelle erreur : 
 if($error != false) {
-    echo "<p class=\"". $color ."\">". $error ."</p>";
+    echo "<p class=\"". $error["color"] ."\">". $error["message"] ."</p>";
 }
 ?>
     <form action="#" method="post" enctype="multipart/form-data">
