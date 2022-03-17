@@ -148,6 +148,9 @@ a:active {
     color: rgb(133, 120, 206);
 }
 /* -----------------------------------------------------[ Divers ]-------------------------- */
+h1 {
+    margin: 20px 0 0 0;
+}
 .error {
     color: white;
     background-color: red;
@@ -175,6 +178,6 @@ a:active {
     width: 150px;
     height: 150px;
 }
-label:hover {
+label {
     cursor: pointer;
 }
