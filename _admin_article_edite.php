@@ -48,13 +48,15 @@ if($_POST) {
         $moveImg = move_uploaded_file($_FILES["img"]["tmp_name"], $targetFile);
         $moveImg == true ? $img = $targetFile : $error = ["message" => "Le fichier n'a pas pu être téléversé.", "color" => "error"];
 
-        // Suppression de l'ancienne image
+        
 
     }
 
     // Vérification des champs
     if($error == false) {// MAJ si tout est OK
         
+        $img = $img != false ? $img : $imgOld;
+
         $pdo = connexion();
         $sql = $pdo->prepare("UPDATE articles SET 
             nom = :name, 
@@ -71,8 +73,9 @@ if($_POST) {
         ]);
         $error = ["message" => "L'article a été modifié avec succès.", "color" => "check"];
         //($img !== false ? unlink($imgOld) : null);
-        if($img != false) {
-            $imgOld = end(explode("/", $imgOld));
+        if($img != $imgOld && $img != "") {// Suppression de l'ancienne image si nouvelle
+            $imgOld = explode("/", $imgOld);
+            $imgOld = "assets/img/" . end($imgOld);
             unlink($imgOld);
         }
     }
