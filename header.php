@@ -20,6 +20,7 @@ require("config.php");
 require("validate.class.php");
 require("user.class.php");
 
+
 // Si il y a une demande de connexion :
 if(isset($_POST["connexion"])) {
     $connexion = new Validate;

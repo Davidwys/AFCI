@@ -52,8 +52,15 @@ require("header.php");
                     <?php echo $produit["nom"] ?>
                 </p>
                 <p class="cardPrice">
-                    <?php echo $produit["prix"] ?> €<?php ?>
+                    
+                <?php foreach ($categories as $produit){
+                    if($produit["categorie"] == 1){echo $produit["petite"] ?> €
                 </p>
+
+                <p class="cardPrice">
+                <?php if($produit["categorie"] == 1){echo $produit["grande"] ?> €
+                </p>
+                    <?php } ?>
             </div>
             <div class="cardBack">
                 <p>Description :
@@ -62,7 +69,7 @@ require("header.php");
             </div>
         </div>
     </div>
-    <?php }/* Fermeture du if*/} //fermeture du foreach ?>
+    <?php }/* Fermeture du if*/} //fermeture du foreach ?>* Fermeture du if*/} //fermeture du foreach ?>
 </section>
 <h1>Les Spéciales</h1>
 
@@ -77,8 +84,15 @@ require("header.php");
                     <?php echo $produit["nom"] ?>
                 </p>
                 <p class="cardPrice">
-                    <?php echo $produit["prix"] ?> €<?php ?>
+                    
+                <?php foreach ($categories as $produit){
+                    if($produit["categorie"] == 1){echo $produit["petite"] ?> €
                 </p>
+
+                <p class="cardPrice">
+                <?php if($produit["categorie"] == 1){echo $produit["grande"] ?> €
+                </p>
+                    <?php } ?>
             </div>
             <div class="cardBack">
                 <p>Description :
@@ -89,6 +103,23 @@ require("header.php");
     </div>
     <?php }/* Fermeture du if*/} //fermeture du foreach ?>
 </section>
+<aside>
+    <table class="panier">
+        <h2>Votre panier</h2>
+        <div class="productLine">
+            <p><?php echo $produit["nom"] ?></p>
+            <button id="plusUn">+</button>
+            <button id="moinsUn">-</button>
+            <button id="remove">supprimer X</button>
+            <p><?php echo $produit["prix"] ?></p>
+        </div>
+        <div class="total">
+            
+            <p><?php echo $totalArticles ?></p>
+            <p><?php echo $totalPrice ?></p>
+        </div>
+</table>
+</aside>
 <?php
 require("footer.php");
 ?>

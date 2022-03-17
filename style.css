@@ -218,3 +218,20 @@ footer p{
     margin-bottom: 15px;
     text-shadow: 2px 2px 2px black;
 }
+
+aside{
+    background-color: yellow;
+    color: black;
+}
+.panier{
+    background-color:yellowgreen;
+    color: black;
+}
+.colsPxUnitaire{
+    background-color: black;
+    color: aliceblue;
+}
+.total{
+    background-color: forestgreen;
+    color: white;
+}

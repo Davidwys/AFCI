@@ -1,0 +1,18 @@
+.panier{
+    border: 3px rgb(36, 194, 84) solid;
+    background-color: white;
+    color: aliceblue;
+}
+
+.total{
+    background-color: rgb(12, 11, 11);
+    color: aliceblue;
+}
+
+.total :nth-last-child(p){
+    background-color: rgb(55, 138, 0);
+    color: aliceblue;
+}
+.productLine{
+    overflow: hidden;
+}
