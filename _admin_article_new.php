@@ -1,20 +1,17 @@
 <?php
 require("_admin_header.php");
-require("_fonctions.php");
 include('_fonctions.php');
+
 $id = false;
 $error = false;
 $color = false;
-// -----------------------------------[ TRAITEMENT DU FORMULAIRE ]-----------
+// -----------------------------------[ TRAITEMENT DU FORMULAIRE ]--------------------------------------------
 if($_POST) {
     // En cas d'erreur, je crée un tableau pour récupérer le message d'erreur et sa classe couleur ;)
-    $id = is_numeric(trim($_GET["id"])) ? $_GET["id"] : $error = ["message" => "Le format de l'identifiant de l'article est inconnu.", "color" => "error"];
-    $cat = is_numeric(trim($_POST["categorie"])) ? $_POST["categorie"] : $error = ["message" => "Le format de l'identifiant de la catégorie est inconnu.", "color" => "error"];
     $nom = cleanString($_POST["name"]) != "" ? cleanString($_POST["name"]) : $error = ["message" => "Le champs \"Nom\" est vide.", "color" => "error"];
     $description = cleanString($_POST["description"]) != "" ? cleanString($_POST["description"]) : $error = ["message" => "Le champs \"Description\" est vide.", "color" => "error"];
-    $imgOld = cleanString($_POST["imgOld"]);
-    $imgOld = is_file($imgOld) ? $imgOld : $imgOld = false;
     $img = false;
+    $cat = is_numeric(trim($_POST["categorie"])) ? $_POST["categorie"] : $error = ["message" => "Le format de l'identifiant de la catégorie est inconnu.", "color" => "error"];
 
     if(is_uploaded_file($_FILES["img"]["tmp_name"])) {
         // Un tableau contenant les types mimes acceptés.
@@ -48,66 +45,48 @@ if($_POST) {
         /* move_uploaded_file déplace un fichier téléversé depuis la zone temporaire jusqu'à son emplacement final et, retourne "true" si tout s'est bien passé sinon "false" ! */
         $moveImg = move_uploaded_file($_FILES["img"]["tmp_name"], $targetFile);
         $moveImg == true ? $img = $targetFile : $error = ["message" => "Le fichier n'a pas pu être téléversé.", "color" => "error"];
-
-        
-
     }
 
     // Vérification des champs
     if($error == false) {// MAJ si tout est OK
         
-        $img = $img != false ? $img : $imgOld;
+        $img = $img != false ? $img : "";
 
         $pdo = connexion();
-        $sql = $pdo->prepare("UPDATE articles SET 
-            nom = :name, 
-            description = :details,
-            idCategorie = :cat,
-            image = :img
-            WHERE idArticle = :id");
+        $sql = $pdo->prepare("INSERT INTO articles (nom, description, image, idcategorie) VALUES (:nom, :des, :img, :cat)");
         $sql->execute([
-            "name" => $nom,
-            "details" => $description,
-            "cat" => $cat,
-            "id" => $id,
-            "img" => $img
+            'nom' => $nom,
+            'des' => $description,
+            'img' => $img,
+            'cat' => $cat
         ]);
-        $error = ["message" => "L'article a été modifié avec succès.", "color" => "check"];
-        //($img !== false ? unlink($imgOld) : null);
-        if($img != $imgOld && $img != "") {// Suppression de l'ancienne image si nouvelle
-            $imgOld = explode("/", $imgOld);
-            $imgOld = "assets/img/" . end($imgOld);
-            unlink($imgOld);
-        }
+        $error = ["message" => "L'article a été ajouté avec succès.", "color" => "check"];
     }
 }
-// -----------------------------------[ TRAITEMENT DU FORMULAIRE : FiN! ]----
-
-if(isset($_GET["id"]) && isset($_GET["action"]) && $_GET["action"] == "edite") {
-    $id = is_numeric(trim($_GET["id"])) ? $_GET["id"] : $error = ["message" => "Aucun article à afficher", "color" => "error"];
-    $article = selectArticle($id);
-}
+// -----------------------------------[ TRAITEMENT DU FORMULAIRE : FiN! ]--------------------------------------------
 ?>
 
 <main>
-    <h1>ADMIN &raquo; Gestion d'un article</h1>
-<?php
-// Affichage d'une eventuelle erreur : 
-if($error != false) {
-    echo "<p class=\"". $error["color"] ."\">". $error["message"] ."</p>";
-}
-?>
+    <h1>ADMIN &raquo; Ajouter un article</h1>
+
+    <?php
+    // Affichage d'une eventuelle erreur : 
+    if($error != false) {
+        echo "<p class=\"". $error["color"] ."\">". $error["message"] ."</p>";
+    }
+    ?>
+    
     <form action="#" method="post" enctype="multipart/form-data">
         <table class="tabForm">
-            <caption>ARTICLES #<?php echo $article["idArticle"]; ?></caption>
-            <tbody><!-- TODO : (1)Ajouter une colonne dans la table "articles" : "disponible" avec 2 états : "en stock", "rupture" et l'ajouter en option ici -->
+            <caption>NOUVEL ARTICLE</caption>
+            <tbody>
                 <tr>
                     <td><label for="name">Nom de l'article</label> : </td>
-                    <td><input type="text" name="name" id="name" value="<?php echo $article["nom"]; ?>" placeholder="Champs vide interdit !"></td>
+                    <td><input type="text" name="name" id="name" placeholder="Champs vide interdit !"></td>
                 </tr>
                 <tr>
                     <td><label for="description">Description</label> : </td>
-                    <td><textarea name="description" id="description" placeholder="Champs vide interdit !" cols="30" rows="10"><?php echo $article["description"]; ?></textarea></td>
+                    <td><textarea name="description" id="description" placeholder="Champs vide interdit !" cols="30" rows="10"></textarea></td>
                 </tr>
                 <tr>
                     <td><label for="categorie">Catégorie</label> : </td>
@@ -128,19 +107,18 @@ if($error != false) {
                 <tr>
                     <td>Illustration : </td>
                     <td class="center">
-                        <input type="hidden" name="imgOld" id="imgOld" value="<?php echo $article["image"]; ?>">
-                        <img src="<?php echo $article["image"]; ?>" class="img-mini" alt="image" class="img-mini">
-                        <p><br><input type="file" name="img" id="img"></p>
-                        <!-- TODO : (1)Personnaliser ce bouton "Parcourir" (2)Ajouter une option "supprimer image" -->
+                        <p><input type="file" name="img" id="img"></p>
+                        <!-- TODO : (1)Personnaliser ce bouton "Parcourir" -->
                     </td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type="submit" value="Modifier"></td>
+                    <td><input type="submit" value="Ajouter"></td>
                 </tr>
             </tbody>
         </table>
     </form>
+    
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>

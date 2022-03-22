@@ -7,24 +7,24 @@ require("_admin_header.php");
 
 <?php
 $error = false;
-function selectAllArticles() {
+function selectAllArticles() {// -------------------------------------[ SéLECTIONNE TOUS LES ARTICLES ]-------
     $pdo = connexion();
     $sql = $pdo->query("SELECT * FROM articles ORDER BY nom DESC");
     return $sql->fetchAll();
-}
+}// ----------------------------------------------------------------------------------------------------------
 $article = selectAllArticles();
 
-function selectAllCategories() {
+function selectAllCategories() {// -----------------------------------[ SéLECTIONNE TOUTES LES CATéGORIES ]---
     $pdo = connexion();
     $sql = $pdo->query("SELECT * FROM categories ORDER BY nom DESC");
     return $sql->fetchAll(PDO::FETCH_GROUP|PDO::FETCH_ASSOC);
-}
+}// ----------------------------------------------------------------------------------------------------------
 
-function deleteArticle($id) {
+function deleteArticle($id) {// --------------------------------------[ SUPPRIME UN ARTICLE ]-----------------
     $pdo = connexion ();
     $sql = $pdo->prepare("DELETE FROM articles WHERE idArticle = :id");
     $sql->execute(["id" => $id]);
-}
+}// ----------------------------------------------------------------------------------------------------------
 
 if(isset($_GET["id"]) && is_numeric($_GET["id"]) && isset($_GET["action"]) && $_GET["action"] == "delete") {
     if(deleteArticle($_GET["id"])) {
@@ -52,8 +52,7 @@ echo "</pre>";*/
                 <th>Nom</th>
                 <th>Description</th>
                 <th>Catégorie</th>
-                <th></th>
-                <th></th>
+                <th colspan="2"><a href="_admin_article_new.php"><img class="icon" src="assets/img/add.png" alt="add"></a></th>
             </tr>
         </thead>
         <tbody>
