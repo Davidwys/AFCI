@@ -6,6 +6,7 @@ require("_admin_header.php");
     <h1>ADMIN &raquo; Gestion des articles</h1>
 
 <?php
+$error = false;
 function selectAllArticles() {
     $pdo = connexion();
     $sql = $pdo->query("SELECT * FROM articles ORDER BY nom DESC");
@@ -18,6 +19,26 @@ function selectAllCategories() {
     $sql = $pdo->query("SELECT * FROM categories ORDER BY nom DESC");
     return $sql->fetchAll(PDO::FETCH_GROUP|PDO::FETCH_ASSOC);
 }
+
+function deleteArticle($id) {
+    $pdo = connexion ();
+    $sql = $pdo->prepare("DELETE FROM articles WHERE idArticle = :id");
+    $sql->execute(["id" => $id]);
+}
+
+if(isset($_GET["id"]) && is_numeric($_GET["id"]) && isset($_GET["action"]) && $_GET["action"] == "delete") {
+    if(deleteArticle($_GET["id"])) {
+        $error = ["message" => "L'article a été supprimé !", "color" => "check"];
+    } else {
+        $error = ["message" => "L'article a supprimer n'existe pas !?", "color" => "error"];
+    }
+}
+
+// Affichage d'une eventuelle erreur : 
+if($error != false) {
+    echo "<p class=\"". $error["color"] ."\">". $error["message"] ."</p>";
+}
+
 $categories = selectAllCategories();
 /*echo "<pre>";
 var_export($categories);
