@@ -106,12 +106,15 @@ require("header.php");
 <aside>
     <table class="panier">
         <h2>Votre panier</h2>
-        <div class="productLine">
+        <div class="contenuPanier">
             <p><?php echo $produit["nom"] ?></p>
+
+            <p><?php echo $produit["prix"] ?></p>
+        </div>
+        <div class="colsPxUnitaire">
             <button id="plusUn">+</button>
             <button id="moinsUn">-</button>
             <button id="remove">supprimer X</button>
-            <p><?php echo $produit["prix"] ?></p>
         </div>
         <div class="total">
             

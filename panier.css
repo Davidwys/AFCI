@@ -1,18 +1,36 @@
+#divPanier{
+
+    grid-row-start :1;
+    grid-row-end: 4;
+    grid-column: 2/3;
+    height: 100%;
+}
+/*     CSS DU BODY = #pizzAndBasket      */
+
+#pizzAndBasket{
+
+    display: grid;
+    row-gap: 15px;
+    grid-template-columns: auto 180px;
+    grid-template-rows: 30% 30% 30%;
+}
 .panier{
     border: 3px rgb(36, 194, 84) solid;
     background-color: white;
     color: aliceblue;
+    width: 500px;
+    height: 100%;
 }
-
+.contenuPanier{
+    background-color: black;
+    color: white;
+    height: 100%;
+}
 .total{
     background-color: rgb(12, 11, 11);
     color: aliceblue;
 }
 
-.total :nth-last-child(p){
-    background-color: rgb(55, 138, 0);
-    color: aliceblue;
-}
 .productLine{
     overflow: hidden;
 }
