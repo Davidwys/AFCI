@@ -9,12 +9,6 @@ include('_fonctions.php');
 <?php
 $error = false;
 
-function selectAllCategories() {// -----------------------------------[ SéLECTIONNE TOUTES LES CATéGORIES ]---
-    $pdo = connexion();
-    $sql = $pdo->query("SELECT * FROM categories ORDER BY nom DESC");
-    return $sql->fetchAll(PDO::FETCH_GROUP|PDO::FETCH_ASSOC);
-}// ----------------------------------------------------------------------------------------------------------
-
 function deleteArticle($id) {// --------------------------------------[ SUPPRIME UN ARTICLE ]-----------------
     $pdo = connexion ();
     $sql = $pdo->prepare("DELETE FROM articles WHERE idArticle = :id");
