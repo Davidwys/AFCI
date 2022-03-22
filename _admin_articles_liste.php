@@ -7,12 +7,6 @@ require("_admin_header.php");
 
 <?php
 $error = false;
-function selectAllArticles() {// -------------------------------------[ SéLECTIONNE TOUS LES ARTICLES ]-------
-    $pdo = connexion();
-    $sql = $pdo->query("SELECT * FROM articles ORDER BY nom DESC");
-    return $sql->fetchAll();
-}// ----------------------------------------------------------------------------------------------------------
-$article = selectAllArticles();
 
 function selectAllCategories() {// -----------------------------------[ SéLECTIONNE TOUTES LES CATéGORIES ]---
     $pdo = connexion();
@@ -24,8 +18,8 @@ function deleteArticle($id) {// --------------------------------------[ SUPPRIME
     $pdo = connexion ();
     $sql = $pdo->prepare("DELETE FROM articles WHERE idArticle = :id");
     $sql->execute(["id" => $id]);
+    return true;
 }// ----------------------------------------------------------------------------------------------------------
-
 if(isset($_GET["id"]) && is_numeric($_GET["id"]) && isset($_GET["action"]) && $_GET["action"] == "delete") {
     if(deleteArticle($_GET["id"])) {
         $error = ["message" => "L'article a été supprimé !", "color" => "check"];
@@ -33,7 +27,12 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && isset($_GET["action"]) && $_
         $error = ["message" => "L'article a supprimer n'existe pas !?", "color" => "error"];
     }
 }
-
+function selectAllArticles() {// -------------------------------------[ SéLECTIONNE TOUS LES ARTICLES ]-------
+    $pdo = connexion();
+    $sql = $pdo->query("SELECT * FROM articles ORDER BY nom DESC");
+    return $sql->fetchAll();
+}// ----------------------------------------------------------------------------------------------------------
+$article = selectAllArticles();
 // Affichage d'une eventuelle erreur : 
 if($error != false) {
     echo "<p class=\"". $error["color"] ."\">". $error["message"] ."</p>";
@@ -64,7 +63,7 @@ foreach($article as $row) {
                 <td><?php echo $row['description']; ?></td>
                 <td class="center"><?php echo $categories[$row['idCategorie']][0]["nom"]; ?></td>
                 <td class="center"><a href="_admin_article_edite.php?id=<?php echo $row['idArticle']; ?>&action=edite" title="Modifier"><img class="icon" src="assets/img/edite.png" alt="edite"></a></td>
-                <td class="center"><a href="#?id=<?php echo $row['idArticle']; ?>&action=delete" title="Supprimer"><img class="icon" src="assets/img/delete.png" alt="delete"></a></td>
+                <td class="center"><a href="?id=<?php echo $row['idArticle']; ?>&action=delete" title="Supprimer"><img class="icon" src="assets/img/delete.png" alt="delete"></a></td>
             </tr>
 <?php
 }
