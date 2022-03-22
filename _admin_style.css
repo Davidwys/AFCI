@@ -8,22 +8,112 @@
 }
 :root {
     /* ----- Ce sont des variables CSS (voir la classe "#admNav" pour utilisation) ----- */
-    --police-un: Verdana, Geneva, Tahoma, sans-serif;
-    --police-deux: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    --police-trois: Arial, Helvetica, sans-serif;
+    --font-ver: Verdana, Geneva, Tahoma, sans-serif;
+    --font-tre: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    --font-ari: Arial, Helvetica, sans-serif;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-ari);
+    padding: 10px;
 }
 #admNav ul {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    font-family: var(--police-un);
+    font-family: var(--font-ver);
     font-size: 16px;
     margin-top: 0;
     margin-left: 0;
     margin-right: 0;
     border-top: 1px solid black;
 }
+/* ------------------------------------------------------ [ Tableaux ]---------------------- */
+table {
+    border-collapse: collapse;
+}
+table, caption {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+caption {
+    text-decoration: underline;
+    font-weight: bold;
+}
+tbody tr:nth-child(even) {
+    background-color: rgb(253, 207, 147);
+}
+tbody tr:nth-child(odd) {
+    background-color: antiquewhite;
+}
+th {
+    background-color: rgb(0, 128, 0);
+    padding: 10px;
+    color: rgb(255, 255, 255);
+}
+td {
+    padding: 5px;
+}
+
+.tabForm {
+    border-collapse: collapse;
+}
+.tabForm > caption {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.tabForm tbody tr {
+    background-color: white;
+}
+.tabForm tbody tr td:nth-child(odd) {
+    text-align: right;
+}
+.tabForm td {
+    padding: 15px;
+}
+/* ------------------------------------------------------ [ Champs de formulaire ]---------- */
+input, select, option, textarea {
+    width: 350px;
+    padding: 5px;
+    font-size: 0.9rem;
+}
+input[type="text"] {
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid green;
+    border-left: 0;
+    font-size: 1rem;
+}
+input[type="submit"] {
+    background-color: green;
+    color: white;
+    padding: 7px;
+    font-size: 0.9rem;
+    border-radius: 7px;
+    border-style: none;
+    /*opacity: 0;*/
+}
+input[type="file"] {
+    background-color: green;
+    color: white;
+}
+select {
+    color: white;
+    background-color: green;
+    border: none;
+    padding: 7px;
+}
+textarea {
+    border: 1px solid green;
+    /*width: 350px;
+    font-size: 1rem;*/
+    resize: none;
+}
+/* ------------------------------------------------------ [ Liens du menu administrateur]--- */
 .lienM,
 .lienM:link,
 .lienM:visited {
@@ -43,6 +133,24 @@
     background-color: black;
     color: whitesmoke;
 }
+/* ------------------------------------------------------ [ Liens ]------------------------- */
+a,
+a:link,
+a:visited {
+    text-decoration: none;
+    color: rgb(114, 89, 255);
+
+}
+a:hover {
+    color:rgb(141, 121, 255);
+}
+a:active {
+    color: rgb(133, 120, 206);
+}
+/* -----------------------------------------------------[ Divers ]-------------------------- */
+h1 {
+    margin: 20px 0 0 0;
+}
 .error {
     color: white;
     background-color: red;
@@ -50,4 +158,26 @@
     padding: 10px;
     width: 75%;
     text-align: center;
+}
+.check {
+    color: white;
+    background-color: rgb(2, 211, 2);
+    border: 1px solid black;
+    padding: 10px;
+    width: 75%;
+    text-align: center;
+}
+.center {
+    text-align: center;
+}
+.icon {
+    width: 20px;
+    height: 20px;
+}
+.img-mini {
+    width: 150px;
+    height: 150px;
+}
+label {
+    cursor: pointer;
 }
