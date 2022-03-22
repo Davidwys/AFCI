@@ -1,7 +1,6 @@
 <?php
 require("_admin_header.php");
 require("_fonctions.php");
-include('_fonctions.php');
 $id = false;
 $error = false;
 $color = false;

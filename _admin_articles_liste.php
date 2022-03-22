@@ -1,5 +1,6 @@
 <?php
 require("_admin_header.php");
+include('_fonctions.php');
 ?>
 
 <main>
@@ -21,7 +22,12 @@ function deleteArticle($id) {// --------------------------------------[ SUPPRIME
     return true;
 }// ----------------------------------------------------------------------------------------------------------
 if(isset($_GET["id"]) && is_numeric($_GET["id"]) && isset($_GET["action"]) && $_GET["action"] == "delete") {
-    if(deleteArticle($_GET["id"])) {
+    // Sélection de l'article : son image surtout !
+    $article = selectArticle($_GET["id"]);
+    $article = $article["image"];
+    //echo $article; exit;
+    if(deleteArticle($_GET["id"])) {//--- TODO : à améliorer car, même si l'article n'existe pas, sera TRUE !
+        unlink($article);
         $error = ["message" => "L'article a été supprimé !", "color" => "check"];
     } else {
         $error = ["message" => "L'article a supprimer n'existe pas !?", "color" => "error"];
