@@ -1,7 +1,15 @@
 <?php
 session_start();
 
-// Si il y a une demande de déconnexion
+//Si on tente d'accéder à une page d'administration sans être "administrateur" :
+if(substr(basename($_SERVER['SCRIPT_NAME']), 0, 6) == '_admin' && $_SESSION['role'] != "administrateur") {
+    header("location:connexion.php");
+    exit();
+}
+
+// TODO : Si il y a une demande d'inscription :
+
+// Si il y a une demande de déconnexion :
 if(isset($_GET['v']) && $_GET['v'] == 'exit') {
     logout();
     // Puis on affiche un petit message à notre utilisateur
