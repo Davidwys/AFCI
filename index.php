@@ -23,14 +23,23 @@ require("header.php");
                     <?php echo $produit["nom"] ?>
                 </p>
                 <p class="cardPrice">
-                    
-                <?php foreach ($categories as $produit){
-                    if($produit["idCategorie"] == 1){echo $produit["petite"]; } ?> €
-                </p>
+                <button>
+                    <h3 class="prixPetite">
+                        <?php foreach ($categories as $produit){
+                            if($produit["idCategorie"] == 1){echo $produit["petite"]; } ?> €
+                        </p>
+                    </h3>
+                </button>
 
                 <p class="cardPrice">
-                <?php if($produit["idCategorie"] == 1){echo $produit["grande"]; } ?> €
-                </p>
+                <button>
+                    <h3 class="grandePrix">
+                        <?php if($produit["idCategorie"] == 1){echo $produit["grande"]; } ?> €
+                        </p>
+                    </h3>
+                </button>
+                
+
                     <?php } ?>
             </div>
             <div class="cardBack">
@@ -55,14 +64,20 @@ require("header.php");
                     <?php echo $produit["nom"] ?>
                 </p>
                 <p class="cardPrice">
-                    
-                <?php foreach ($categories as $produit){
-                    if($produit["idCategorie"] == 1){echo $produit["petite"]; } ?> €
-                </p>
-
+                <button>
+                    <h3 class="prixPetite">   
+                        <?php foreach ($categories as $produit){
+                            if($produit["idCategorie"] == 1){echo $produit["petite"]; } ?> €
+                        </p>
+                    </h3>
+                </button>
                 <p class="cardPrice">
-                <?php if($produit["idCategorie"] == 1){echo $produit["grande"]; } ?> €
-                </p>
+                <button>
+                    <h3 class="grandePrix">
+                        <?php if($produit["idCategorie"] == 1){echo $produit["grande"]; } ?> €
+                        </p>
+                    </h3>
+                </button>    
                     <?php } ?>
             </div>
             <div class="cardBack">
@@ -87,15 +102,19 @@ require("header.php");
                     <?php echo $produit["nom"] ?>
                 </p>
                 <p class="cardPrice">
-                    
-                <?php foreach ($categories as $produit){
-                    if($produit["idCategorie"] == 1){echo $produit["petite"]; } ?> €
-                </p>
-
-                <p class="cardPrice">
-                <?php if($produit["idCategorie"] == 1){echo $produit["grande"]; } ?> €
-                </p>
-                    <?php } ?>
+                <button>
+                    <h3 class="prixPetite">  
+                        <?php foreach ($categories as $produit){
+                            if($produit["idCategorie"] == 1){echo $produit["petite"]; } ?> €
+                    </h3>
+                </button>
+                <button>
+                    <h3 class="grandePrix">
+                        <?php if($produit["idCategorie"] == 1){echo $produit["grande"]; } ?> €
+                    </h3>
+                </button>
+                <?php } ?>
+                </p>    
             </div>
             <div class="cardBack">
                 <p>Description :

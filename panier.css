@@ -30,7 +30,18 @@
     background-color: rgb(12, 11, 11);
     color: aliceblue;
 }
-
+.cardPrice{
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    /* background-color: green; */
+    border: 3px blue solid;
+}
+button{
+    background-color: aqua;
+}
 .productLine{
     overflow: hidden;
 }
