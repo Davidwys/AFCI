@@ -9,9 +9,12 @@ require("header.php");
     $pdo = connexion();  // connexion BDD dans une variable ($pdo retournée de config..php)
     $sql = $pdo->query("SELECT * FROM articles"); //tu m'amènes la requete sur la table articles
     $articles = $sql->fetchAll(); //$articles = requeteSQL tu me ramènes
+    $sql2 = $pdo->query("SELECT * FROM categories");
+    $categories = $sql->fetchAll();
     
     foreach($articles as $produit){ 
-        if($produit["categorie"] == 1){?>
+        //var_dump($produit);
+        if($produit["idCategorie"] == 1){?>
     <div class="cardContainer">
         <div class="card">
             <div class="cardFront">
@@ -22,11 +25,11 @@ require("header.php");
                 <p class="cardPrice">
                     
                 <?php foreach ($categories as $produit){
-                    if($produit["categorie"] == 1){echo $produit["petite"] ?> €
+                    if($produit["idCategorie"] == 1){echo $produit["petite"]; } ?> €
                 </p>
 
                 <p class="cardPrice">
-                <?php if($produit["categorie"] == 1){echo $produit["grande"] ?> €
+                <?php if($produit["idCategorie"] == 1){echo $produit["grande"]; } ?> €
                 </p>
                     <?php } ?>
             </div>
@@ -42,8 +45,8 @@ require("header.php");
 <h1>Les Gourmandes</h1>
 
 <section>
-    <?php foreach($article as $produit){ 
-        if($produit["categorie"] == 2){?>
+    <?php foreach($articles as $produit){ 
+        if($produit["idCategorie"] == 2){?>
     <div class="cardContainer">
         <div class="card">
             <div class="cardFront">
@@ -54,11 +57,11 @@ require("header.php");
                 <p class="cardPrice">
                     
                 <?php foreach ($categories as $produit){
-                    if($produit["categorie"] == 1){echo $produit["petite"] ?> €
+                    if($produit["idCategorie"] == 1){echo $produit["petite"]; } ?> €
                 </p>
 
                 <p class="cardPrice">
-                <?php if($produit["categorie"] == 1){echo $produit["grande"] ?> €
+                <?php if($produit["idCategorie"] == 1){echo $produit["grande"]; } ?> €
                 </p>
                     <?php } ?>
             </div>
@@ -69,13 +72,13 @@ require("header.php");
             </div>
         </div>
     </div>
-    <?php }/* Fermeture du if*/} //fermeture du foreach ?>* Fermeture du if*/} //fermeture du foreach ?>
+    <?php }/* Fermeture du if*/} //fermeture du foreach ?>
 </section>
 <h1>Les Spéciales</h1>
 
 <section>
-    <?php foreach($article as $produit){ 
-        if($produit["categorie"] == 3){?>
+    <?php foreach($articles as $produit){ 
+        if($produit["idCategorie"] == 3){?>
     <div class="cardContainer">
         <div class="card">
             <div class="cardFront">
@@ -86,11 +89,11 @@ require("header.php");
                 <p class="cardPrice">
                     
                 <?php foreach ($categories as $produit){
-                    if($produit["categorie"] == 1){echo $produit["petite"] ?> €
+                    if($produit["idCategorie"] == 1){echo $produit["petite"]; } ?> €
                 </p>
 
                 <p class="cardPrice">
-                <?php if($produit["categorie"] == 1){echo $produit["grande"] ?> €
+                <?php if($produit["idCategorie"] == 1){echo $produit["grande"]; } ?> €
                 </p>
                     <?php } ?>
             </div>
