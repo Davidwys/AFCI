@@ -11,9 +11,19 @@ function selectArticle($i) {
     return $sql->fetch();
 }
 
+function selectCategorie($i) {// -----------------------------------[ SéLECTIONNE TOUTES LES CATéGORIES ]---
+    $pdo = connexion();
+    $sql = $pdo->query("SELECT * FROM categories WHERE idCategorie = $i");
+    return $sql->fetch();
+}
 function selectAllCategories() {// -----------------------------------[ SéLECTIONNE TOUTES LES CATéGORIES ]---
     $pdo = connexion();
-    $sql = $pdo->query("SELECT * FROM categories ORDER BY nom DESC");
+    $sql = $pdo->query("SELECT * FROM categories ORDER BY nom ASC");
     return $sql->fetchAll(PDO::FETCH_GROUP|PDO::FETCH_ASSOC);
+}
+function selectAllCategories2() {// -----------------------------------[ SéLECTIONNE TOUTES LES CATéGORIES ]---
+    $pdo = connexion();
+    $sql = $pdo->query("SELECT * FROM categories ORDER BY nom ASC");
+    return $sql->fetchAll();
 }// ----------------------------------------------------------------------------------------------------------
 ?>

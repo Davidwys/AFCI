@@ -27,6 +27,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && isset($_GET["action"]) && $_
         $error = ["message" => "L'article a supprimer n'existe pas !?", "color" => "error"];
     }
 }
+
 function selectAllArticles() {// -------------------------------------[ SéLECTIONNE TOUS LES ARTICLES ]-------
     $pdo = connexion();
     $sql = $pdo->query("SELECT * FROM articles ORDER BY nom DESC");
@@ -39,9 +40,6 @@ if($error != false) {
 }
 
 $categories = selectAllCategories();
-/*echo "<pre>";
-var_export($categories);
-echo "</pre>";*/
 ?>
 
     <table>
