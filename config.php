@@ -4,8 +4,8 @@ function connexion() {
     $config = array(
         "host" => "localhost",
         "db" => "projet_pizza",
-        "user" => "root",
-        "password" => "",
+        "user" => "david",
+        "password" => "david",
         "charset" => "utf8mb4",
         "options" => [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

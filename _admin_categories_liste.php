@@ -17,7 +17,9 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && isset($_GET["action"]) && $_
     $cat = selectCategorie($_GET["id"]);
     $cat = $cat["image"];
     if(deleteCategorie($_GET["id"])) {//--- TODO : à améliorer car, même si la catégorie n'existe pas, se sera TRUE !
-        file_exists($cat) ?? unlink($cat);
+        // file_exists($cat) ?? unlink($cat);
+        file_exists($cat) ? unlink($cat) : null;
+        //echo $cat;
         $error = ["message" => "La catégorie a été supprimée !", "color" => "check"];
     } else {
         $error = ["message" => "La catégorie a supprimer n'existe pas !?", "color" => "error"];
@@ -25,7 +27,7 @@ if(isset($_GET["id"]) && is_numeric($_GET["id"]) && isset($_GET["action"]) && $_
 }
 
 // -----------------------------------[ TRAITEMENT DU FORMULAIRE ]--------------------------------------------
-if($_POST) {
+if($_POST && isset($_GET["action"]) && $_GET["action"] == "add") {
     $name = cleanString($_POST["name"]) != "" ? cleanString($_POST["name"]) : $error = ["message" => "Le champs \"Nom\" est vide.", "color" => "error"];
     /* TODO : vérifier que le nom n'existe pas déjà dans la BDD */
     $small = is_numeric($_POST["small"]) != "" ? ($_POST["small"]) : $error = ["message" => "Le champs \"Petite\" est vide.", "color" => "error"];
@@ -96,7 +98,7 @@ if($_POST) {
     }
     ?>
     <!-- ------------------------------------[ FORMULAIRE ]------------------------------------------ -->
-     <form action="#" method="post" enctype="multipart/form-data">
+     <form action="_admin_categories_liste.php?action=add" method="post" enctype="multipart/form-data">
         <table class="tabForm">
             <caption>Ajouter une catégorie</caption>
             <tbody>
