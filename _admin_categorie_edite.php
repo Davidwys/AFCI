@@ -7,10 +7,10 @@ $color = false;
 // -----------------------------------[ TRAITEMENT DU FORMULAIRE ]-----------
 if($_POST) {
     // En cas d'erreur, je crée un tableau pour récupérer le message d'erreur et sa classe couleur ;)
-    $id = is_numeric(trim($_GET["id"])) ? $_GET["id"] : $error = ["message" => "Le format de l'identifiant de l'article est inconnu.", "color" => "error"];
-    $cat = is_numeric(trim($_POST["categorie"])) ? $_POST["categorie"] : $error = ["message" => "Le format de l'identifiant de la catégorie est inconnu.", "color" => "error"];
-    $nom = cleanString($_POST["name"]) != "" ? cleanString($_POST["name"]) : $error = ["message" => "Le champs \"Nom\" est vide.", "color" => "error"];
-    $description = cleanString($_POST["description"]) != "" ? cleanString($_POST["description"]) : $error = ["message" => "Le champs \"Description\" est vide.", "color" => "error"];
+    $id = is_numeric(trim($_GET["id"])) ? $_GET["id"] : $error = ["message" => "Le format de l'identifiant de la catégorie est inconnu.", "color" => "error"];
+    $nom = cleanString($_POST["name"]) != "" ? cleanString($_POST["name"]) : $error = ["message" => "Le champs \"Nom de la catégorie\" est vide.", "color" => "error"];
+    $small = cleanString($_POST["small"]) != "" ? cleanString($_POST["small"]) : $error = ["message" => "Le champs \"Petit(e)\" est vide.", "color" => "error"];
+    $big = cleanString($_POST["big"]) != "" ? cleanString($_POST["big"]) : $error = ["message" => "Le champs \"Grand(e)\" est vide.", "color" => "error"];
     $imgOld = cleanString($_POST["imgOld"]);
     $imgOld = is_file($imgOld) ? $imgOld : $imgOld = false;
     $img = false;
@@ -47,9 +47,6 @@ if($_POST) {
         /* move_uploaded_file déplace un fichier téléversé depuis la zone temporaire jusqu'à son emplacement final et, retourne "true" si tout s'est bien passé sinon "false" ! */
         $moveImg = move_uploaded_file($_FILES["img"]["tmp_name"], $targetFile);
         $moveImg == true ? $img = $targetFile : $error = ["message" => "Le fichier n'a pas pu être téléversé.", "color" => "error"];
-
-        
-
     }
 
     // Vérification des champs
@@ -58,20 +55,20 @@ if($_POST) {
         $img = $img != false ? $img : $imgOld;
 
         $pdo = connexion();
-        $sql = $pdo->prepare("UPDATE articles SET 
-            nom = :name, 
-            description = :details,
-            idCategorie = :cat,
-            image = :img
-            WHERE idArticle = :id");
+        $sql = $pdo->prepare("UPDATE categories SET 
+            nom = :name,
+            image = :img,
+            petite = :small,
+            grande = :big
+            WHERE idCategorie = :id");
         $sql->execute([
             "name" => $nom,
-            "details" => $description,
-            "cat" => $cat,
             "id" => $id,
-            "img" => $img
+            "img" => $img,
+            "small" => $small,
+            "big" => $big
         ]);
-        $error = ["message" => "L'article a été modifié avec succès.", "color" => "check"];
+        $error = ["message" => "La catégorie a été modifié avec succès.", "color" => "check"];
         //($img !== false ? unlink($imgOld) : null);
         if($img != $imgOld && $img != "") {// Suppression de l'ancienne image si nouvelle
             $imgOld = explode("/", $imgOld);
@@ -83,8 +80,8 @@ if($_POST) {
 // -----------------------------------[ TRAITEMENT DU FORMULAIRE : FiN! ]----
 
 if(isset($_GET["id"]) && isset($_GET["action"]) && $_GET["action"] == "edite") {
-    $id = is_numeric(trim($_GET["id"])) ? $_GET["id"] : $error = ["message" => "Aucun article à afficher", "color" => "error"];
-    $article = selectArticle($id);
+    $id = is_numeric(trim($_GET["id"])) ? $_GET["id"] : $error = ["message" => "Aucune catégorie à afficher", "color" => "error"];
+    $categorie = selectCategorie($id);
 }
 ?>
 
@@ -98,37 +95,25 @@ if($error != false) {
 ?>
     <form action="#" method="post" enctype="multipart/form-data">
         <table class="tabForm">
-            <caption>ARTICLE #<?php echo $article["idArticle"]; ?></caption>
-            <tbody><!-- TODO : (1)Ajouter une colonne dans la table "articles" : "disponible" avec 2 états : "en stock", "rupture" et l'ajouter en option ici -->
+            <caption>CATÉGORIE #<?php echo $categorie["idCategorie"]; ?></caption>
+            <tbody>
                 <tr>
-                    <td><label for="name">Nom de l'article</label> : </td>
-                    <td><input type="text" name="name" id="name" value="<?php echo $article["nom"]; ?>" placeholder="Champs vide interdit !"></td>
+                    <td><label for="name">Nom de la catégorie</label> : </td>
+                    <td><input type="text" name="name" id="name" value="<?php echo $categorie["nom"]; ?>" placeholder="Champs vide interdit !"></td>
                 </tr>
                 <tr>
-                    <td><label for="description">Description</label> : </td>
-                    <td><textarea name="description" id="description" placeholder="Champs vide interdit !" cols="30" rows="10"><?php echo $article["description"]; ?></textarea></td>
+                    <td>Petit(e) : </td>
+                    <td><input type="number" name="small" id="small" value="<?php echo $categorie["petite"]; ?>" step="0.01"></td>
                 </tr>
                 <tr>
-                    <td><label for="categorie">Catégorie</label> : </td>
-                    <td>
-                        <select name="categorie" id="categorie">
-                            <?php 
-                            $pdo = connexion();
-                            $sql = $pdo->query("SELECT * FROM categories ORDER BY nom");
-                            $cato = $sql->fetchAll();
-                            foreach($cato as $cat) {
-                                $select = $cat["idCategorie"] == $article["idCategorie"] ? " selected" : "";
-                                echo '<option value="'.$cat["idCategorie"].'"'.$select.'>'.$cat["nom"].'</option>';
-                            }
-                            ?>
-                        </select>
-                    </td>
-                </tr>
+                    <td>Grand(e) : </td>
+                    <td><input type="number" name="big" id="big" value="<?php echo $categorie["grande"]; ?>" step="0.01"></td>
+                </tr
                 <tr>
                     <td>Illustration : </td>
                     <td class="center">
-                        <input type="hidden" name="imgOld" id="imgOld" value="<?php echo $article["image"]; ?>">
-                        <img src="<?php echo $article["image"]; ?>" class="img-mini" alt="image" class="img-mini">
+                        <input type="hidden" name="imgOld" id="imgOld" value="<?php echo $categorie["image"]; ?>">
+                        <img src="<?php echo $categorie["image"]; ?>" class="img-mini" alt="image" class="img-mini">
                         <p><br><input type="file" name="img" id="img"></p>
                         <!-- TODO : (1)Personnaliser ce bouton "Parcourir" (2)Ajouter une option "supprimer image" -->
                     </td>

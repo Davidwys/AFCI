@@ -146,7 +146,7 @@ if($_POST && isset($_GET["action"]) && $_GET["action"] == "add") {
                 <td><?php echo $row['nom']; ?></td>
                 <td><?php echo $row['petite']; ?></td>
                 <td><?php echo $row['grande']; ?></td>
-                <td><a href="_admin_categories_edite.php?id=<?php echo $row['idCategorie']; ?>&action=edite" title="Modifier"><img class="icon" src="assets/img/edite.png" alt="edite"></a></td>
+                <td><a href="_admin_categorie_edite.php?id=<?php echo $row['idCategorie']; ?>&action=edite" title="Modifier"><img class="icon" src="assets/img/edite.png" alt="edite"></a></td>
                 <td><a href="?id=<?php echo $row['idCategorie']; ?>&action=delete" title="Supprimer"><img class="icon" src="assets/img/delete.png" alt="delete"></a></td>
             </tr>
             <?php
