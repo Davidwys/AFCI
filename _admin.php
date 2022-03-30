@@ -9,14 +9,21 @@ require("_admin_header.php");
         -> _admin_categories_liste.php => même chose pour les catégorie ;)
         -> _admin_users_liste.php => même chose pour les users ;)
      -->
-     <h2><a href="_admin_articles_liste.php">Gestion des articles</a></h2>
-     <p>Page d'administration des articles</p>
-     <h2><a href="_admin_categories_liste.php">Gestion des catégories</a></h2>
-     <p>Page d'administration des catégories</p>
-     <h2><a href="_admin_users_liste.php">Gestion des utilisateurs</a></h2>
-     <p>Page d'administration des utilisateurs
-         <!-- TODO : Afficher le nbr d'articles en BDD, le nbr d'utilisateurs, le nbr de catégories, autre ? -->
-     </p>
+     <div class="adm-home">
+        <!-- TODO : Afficher le nbr d'articles en BDD, le nbr d'utilisateurs, le nbr de catégories, autre ? -->
+        <article class="adm-box adm-articles">
+            <h2><a href="_admin_articles_liste.php">Gestion des articles</a></h2>
+            <p>Page d'administration des articles</p>
+        </article>
+        <article class="adm-box adm-categories">
+            <h2><a href="_admin_categories_liste.php">Gestion des catégories</a></h2>
+            <p>Page d'administration des catégories</p>
+        </article>
+        <article class="adm-box adm-users">
+            <h2><a href="_admin_users_liste.php">Gestion des utilisateurs</a></h2>
+            <p>Page d'administration des utilisateurs</p>
+        </article>
+     </div>
      <p>&nbsp;</p>
      <p>&nbsp;</p>
      <p>&nbsp;</p>

@@ -35,7 +35,6 @@ nav ul{
     justify-content: space-around;
     margin: 2vh;
 }
-
 nav li{
     display: inline;
     width: 100%;
@@ -44,8 +43,6 @@ nav li{
     text-align: center;
     
 }
-
-
 
 /* -------- CONTENEURS DES CARTES PRODUITS ------------*/
 
